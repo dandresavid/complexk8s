@@ -1,0 +1,36 @@
+{
+    "ASWEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "dandresbr/multi-client",
+            "hostname" : "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "dandresbr/multi-server",
+            "hostname" : "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "dandresbr/multi-worker",
+            "hostname" : "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "dandresbr/multi-nginx",
+            "hostname" : "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
